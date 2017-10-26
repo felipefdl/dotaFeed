@@ -29,4 +29,4 @@ const server = micro(async (req, res) => {
   return generateFeed();
 });
 
-server.listen(3000)
+server.listen(process.env.PORT || 3000)
