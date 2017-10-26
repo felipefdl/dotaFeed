@@ -1,6 +1,5 @@
 const axios      = require('axios');
 const jsdom      = require('jsdom');
-const htmlToText = require('html-to-text');
 const RSS        = require('rss');
 const micro      = require('micro')
 const { JSDOM }  = jsdom;
@@ -11,13 +10,19 @@ async function generateFeed() {
   const dUpdates = dom.window.document.querySelectorAll('.newsPostBlock.steam_updates');
 
   const feed = new RSS({
-    title: 'Dota 2 updates',
+    title: 'Dota 2 - Changelog',
+    feed_url: 'https://dotafeed.herokuapp.com',
+    language: 'en',
+    ttl: '60',
+    categories: ['Games', 'Dota 2'],
   });
 
   dUpdates.forEach(item => {
     feed.item({
       title: item.querySelector('.posttitle').textContent,
-      description: htmlToText.fromString(dUpdates[0].querySelector('.body').innerHTML)
+      date: `${item.querySelector('.date').textContent.trim()} ${new Date().getFullYear()}`,
+      url: item.querySelector('.posttitle a').href,
+      description: dUpdates[0].querySelector('.body').innerHTML
     });
   });
 

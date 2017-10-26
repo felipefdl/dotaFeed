@@ -14,7 +14,6 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.17.0",
-    "html-to-text": "^3.3.0",
     "jsdom": "^11.3.0",
     "micro": "^9.0.0",
     "rss": "^1.2.2"
